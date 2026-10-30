@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.1 – 2026-10-30
+
+- Fixed: the mod no longer gets in the way of climbing and its on-screen prompt. Sprint pauses in climb, wall-run,
+  ladder and rope zones and during those moves, then returns by itself.
+
 ## v1.0.0 – 2026-10-30
 
 First public release.

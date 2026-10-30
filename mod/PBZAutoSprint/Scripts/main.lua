@@ -11,6 +11,7 @@
 --
 -- Rules (only while the player is running on the ground, out of combat, not sneaking or walking):
 --   * Sprint, unless an enemy is closer than stopDistance (enter the fight in control, not at full speed).
+--   * No sprint in a climb/wall-run/ladder/rope zone or during such a move: the held key gets in the way of its prompt.
 --
 -- Keys: F5 = auto sprint on/off.
 -- Settings are remembered in settings.txt next to this mod; set `log = true` below for autosprint.log.
@@ -258,8 +259,16 @@ local function tick()
     -- Decide.
     local want, reason = running, nil
     local stopAt = CFG.stopDistance + (S.want and 0 or CFG.resumeMargin)
+    -- The game sets InVolume as soon as a move's prompt can appear, before the move itself starts.
+    local special = has("CharacterState.InVolume.SpecialMove") or has("CharacterState.SpecialMove")
+    if special ~= (S.special or false) then
+        S.special = special
+        log(special and "SPECIAL enter" or "SPECIAL leave", string.format("speed %.0f, sprint %s", speed, tostring(S.want)))
+    end
     if has("CharacterState.InCombat") then
         reason = "combat"
+    elseif special then
+        want = false
     elseif want and S.enemyDist < stopAt then
         want, reason = false, string.format("enemy %.0f m", S.enemyDist / 100)
     end

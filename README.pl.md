@@ -51,7 +51,7 @@ więc mod nie musi niczego liczyć w związku z Shachi.
 
 ## 🚀 Łatwa instalacja (zalecana)
 
-1. Pobierz **`PBZ-AutoSprint-v1.0.0.zip`** ze strony [**Releases**](../../releases/latest).
+1. Pobierz **`PBZ-AutoSprint-v1.0.1.zip`** ze strony [**Releases**](../../releases/latest).
 2. Rozpakuj zip w dowolnym miejscu (np. na Pulpicie).
 3. **Zamknij grę.**
 4. Kliknij dwukrotnie **`install.bat`**.
