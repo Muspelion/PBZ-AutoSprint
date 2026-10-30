@@ -208,6 +208,13 @@ local function tick()
         if not valid(S.pawn) then return end
     end
     local now = GS:GetTimeSeconds(S.pawn)
+    -- Game time restarts with every level load: everything scheduled on the old clock is void.
+    if S.lastNow and now < S.lastNow - 0.5 then
+        S.refreshAt, S.scanAt, S.lastLogic, S.blockTipAt, S.tipHideAt, S.want = 0, 0, nil, nil, nil, false
+    end
+    -- Time stands still in pause and full-screen menus: never hold the key there.
+    local paused = S.lastNow == now
+    S.lastNow = now
     if now >= S.refreshAt then refresh(now) end
     if not (valid(S.asc) and valid(S.input)) then return end
 
@@ -232,7 +239,7 @@ local function tick()
     end
 
     -- The held key has to be injected every frame; the decision below runs 10 times a second.
-    if S.want then holdSprint() end
+    if S.want and not paused then holdSprint() end
 
     if now - (S.lastLogic or -1) < 0.1 then return end
     S.lastLogic = now

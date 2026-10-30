@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.2 – 2026-10-30
+
+- Fixed: after death or loading a save, timers from the old session could stop the mod.
+- The sprint key is no longer held while the game is paused.
+
 ## v1.0.1 – 2026-10-30
 
 - Fixed: the mod no longer gets in the way of climbing and its on-screen prompt. Sprint pauses in climb, wall-run,
